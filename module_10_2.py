@@ -25,14 +25,14 @@ class Knight(Thread):
         print(f'{self.name} на нас напали!')
         enemies = 100
         day = 0
-        for i in range(enemies):
-            if enemies > 0:
-                time.sleep(2)
-                day += 1
-                enemies -= self.power
-                print(f'{self.name} сражается {day} день(дня), осталось {enemies} воинов.')
-                if enemies <= 0:
-                    print(f'{self.name} одержал победу спустя {day} дней(день)!')
+        while enemies > 0:
+            time.sleep(1)
+            day += 1
+            enemies -= self.power
+            if enemies < 0:
+                enemies = 0
+            print(f'{self.name} сражается {day} день(дня), осталось {enemies} воинов.')
+        print(f'{self.name} одержал победу спустя {day} дней(день)!')
 
 first_knight = Knight('Sir Lancelot', 10)
 second_knight = Knight("Sir Galahad", 20)
