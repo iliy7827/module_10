@@ -56,13 +56,13 @@ class Cafe:
 Если очередь ещё не пуста (метод empty) и стол один из столов освободился (None), то текущему столу присваивается
 гость взятый из очереди (queue.get()). Далее выводится строка "<имя гостя из очереди> вышел(-ла) из очереди и сел(-а)
 за стол номер <номер стола>'''
-        while True:
+        while not self.queue.empty() or any(table.guest is not None for table in self.tables):
             for table in self.tables:
                 if (not self.queue.empty()) and (table.guest is None):
                     table.guest = self.queue.get()
                     print(f'{table.guest.name} вышел(-ла) из очереди и сел(-а) за стол номер {table.number}')
                     table.guest.start()
-                if (not table.guest is None) and (table.guest.is_alive()):
+                if table.guest is not None and not table.guest.is_alive():
                     print(f'{table.guest.name} покушал(-а) и ушёл(ушла)')
                     print(f'Стол номер {table.number} свободен')
                     table.guest = None
